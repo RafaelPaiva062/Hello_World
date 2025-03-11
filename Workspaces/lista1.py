@@ -3,6 +3,7 @@
 
 
 
+conta= []
 def cadastro_conta(conta):
     contas = {}
     contas['nome']= str(input("Digite seu nome: \n"))
@@ -25,19 +26,21 @@ def mostrar_conta(conta):
         print(f'Saldo : {conta[i]['saldo']}')
         print("***"*30)
 def depositar_valor(conta):
-    if len(conta) ==0:
+    if not conta:
         print('Nenhuma conta cadastrado.')
         return conta
     try:
         numero_conta = int(input("Informe o número da conta para depósito: ")) - 1
         if numero_conta < 0 or numero_conta>= len(conta):
             print("Conta inválida.")
+            return
         else:
             valor =float(input("digite o valor do depósito"))
             if valor <= 0:
                 print("O valor de ser positivo")
+                return
             else:
-                conta[numero_conta]['saldor'] += valor
+                conta[numero_conta]['saldo'] += valor
                 print(f"Depósito realizado com sucesso! Saldo atual: {conta[numero_conta]['saldo']}")
                 return conta
     except:
@@ -53,6 +56,7 @@ def sacar_dinheiro_conta(conta):
         numero_conta = int(input("Informe o número da conta para saque: ")) - 1
         if numero_conta < 0 or numero_conta >= len(conta):
             print("Conta inválida.")
+            return
         else:
             valor = float(input("Digite o valor do saque: \n"))
             if valor <= 0:
@@ -75,7 +79,6 @@ def encerrar_contar(conta):
     except:
             print('Não foi possível deletar o conta.')
 
-conta= []
 
 while True:
     escolha=int(input('Digite a opção  que deseja: \n 1- Cadastra Conta \n 2- Mostra Conta \n 3- Depósitar \n 4- Sacar \n 5-Encerrar Conta \n 6-Sair: \n'))
